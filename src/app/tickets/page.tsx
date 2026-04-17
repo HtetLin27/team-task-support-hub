@@ -2,9 +2,11 @@ import FilterBar from "@/components/shared/FilterBar";
 import PageHeader from "@/components/shared/PageHeader";
 import { mockTickets } from "@/constants/mockTickets";
 import TicketCard from "@/features/tickets/TicketCard";
+import TicketDetailShell from "@/features/tickets/TicketDetailShell";
 import TicketFormShell from "@/features/tickets/TicketFormShell";
 
 export default function TicketsPage() {
+   const selectedTicket = mockTickets[0];
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
       <PageHeader
@@ -31,7 +33,14 @@ export default function TicketsPage() {
           </div>
         </div>
         <div className="space-y-4">
-          <TicketFormShell />
+          {/* <TicketFormShell /> */}
+          <TicketDetailShell
+            subject={selectedTicket.subject}
+            priority={selectedTicket.priority}
+            status={selectedTicket.status}
+            requester={selectedTicket.requester}
+            createdAt={selectedTicket.createdAt}
+          />
         </div>
       </div>
 

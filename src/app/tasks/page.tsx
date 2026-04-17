@@ -2,9 +2,11 @@ import FilterBar from "@/components/shared/FilterBar";
 import PageHeader from "@/components/shared/PageHeader";
 import { mockTasks } from "@/constants/mockTasks";
 import TaskCard from "@/features/tasks/TaskCard";
+import TaskDetailShell from "@/features/tasks/TaskDetailShell";
 import TaskFormShell from "@/features/tasks/TaskFormShell";
 
 export default function TasksPage() {
+  const selectedTask = mockTasks[0];
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
       <PageHeader
@@ -31,7 +33,15 @@ export default function TasksPage() {
           </div>
         </div>
         <div className="space-y-4">
-          <TaskFormShell />
+          {/* <TaskFormShell /> */}
+          <TaskDetailShell
+            title={selectedTask.title}
+            description={selectedTask.description}
+            status={selectedTask.status}
+            priority={selectedTask.priority}
+            assignee={selectedTask.assignee}
+            createdAt={selectedTask.createdAt}
+          />
         </div>
       </div>
 
