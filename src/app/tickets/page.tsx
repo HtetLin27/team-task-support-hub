@@ -2,6 +2,7 @@ import FilterBar from "@/components/shared/FilterBar";
 import PageHeader from "@/components/shared/PageHeader";
 import { mockTickets } from "@/constants/mockTickets";
 import TicketCard from "@/features/tickets/TicketCard";
+import TicketFormShell from "@/features/tickets/TicketFormShell";
 
 export default function TicketsPage() {
   return (
@@ -16,16 +17,25 @@ export default function TicketsPage() {
         primaryActionLabel="Create Ticket"
       />
 
-      <div className="grid gap-4">
-        {mockTickets.map((ticket) => (
-          <TicketCard
-            key={ticket.id}
-            subject={ticket.subject}
-            priority={ticket.priority}
-            status={ticket.status}
-          />
-        ))}
+      <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+        <div className="space-y-4">
+          <div className="grid gap-4">
+            {mockTickets.map((ticket) => (
+              <TicketCard
+                key={ticket.id}
+                subject={ticket.subject}
+                priority={ticket.priority}
+                status={ticket.status}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="space-y-4">
+          <TicketFormShell />
+        </div>
       </div>
+
+      
     </main>
   );
 }

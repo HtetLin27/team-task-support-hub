@@ -15,7 +15,10 @@ export default function DashboardPage() {
       />
       <div className="grid gap-4 md:grid-cols-3">
         <StatCard title="Total Tasks" count={mockTasks.length} />
-        <StatCard title="Open Tickets" count={mockTickets.length} />
+        <StatCard
+          title="Open Tickets"
+          count={mockTickets.filter((ticket) => ticket.status === "Open").length}
+        />
         <StatCard title="Team Members" count={0} />
       </div>
       <div className="mt-2 space-y-2">

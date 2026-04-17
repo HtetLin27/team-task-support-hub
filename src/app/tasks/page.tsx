@@ -2,6 +2,7 @@ import FilterBar from "@/components/shared/FilterBar";
 import PageHeader from "@/components/shared/PageHeader";
 import { mockTasks } from "@/constants/mockTasks";
 import TaskCard from "@/features/tasks/TaskCard";
+import TaskFormShell from "@/features/tasks/TaskFormShell";
 
 export default function TasksPage() {
   return (
@@ -16,16 +17,25 @@ export default function TasksPage() {
         primaryActionLabel="Create Task"
       />
 
-      <div className="grid gap-4">
-        {mockTasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            title={task.title}
-            description={task.description}
-            status={task.status}
-          />
-        ))}
+      <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+        <div className="space-y-4">
+          <div className="grid gap-4">
+            {mockTasks.map((task) => (
+              <TaskCard
+                key={task.id}
+                title={task.title}
+                description={task.description}
+                status={task.status}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="space-y-4">
+          <TaskFormShell />
+        </div>
       </div>
+
+
     </main>
   );
 }
