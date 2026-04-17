@@ -1,4 +1,5 @@
 import PageHeader from "@/components/shared/PageHeader";
+import StatCard from "@/components/shared/StatCard";
 
 export default function DashboardPage() {
   return (
@@ -9,18 +10,9 @@ export default function DashboardPage() {
       />
 
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-          <h2 className="text-sm text-gray-500">Total Tasks</h2>
-          <p className="mt-2 text-2xl font-bold">0</p>
-        </div>
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-          <h2 className="text-sm text-gray-500">Open Tickets</h2>
-          <p className="mt-2 text-2xl font-bold">0</p>
-        </div>
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-          <h2 className="text-sm text-gray-500">Team Members</h2>
-          <p className="mt-2 text-2xl font-bold">0</p>
-        </div>
+        <StatCard title="Total Tasks" count={0} />
+        <StatCard title="Open Tickets" count={0} />
+        <StatCard title="Team Members" count={0} />
       </div>
     </main>
   );

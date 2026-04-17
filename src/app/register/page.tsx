@@ -1,4 +1,7 @@
+import AuthCard from "@/components/shared/AuthCard";
+import InputField from "@/components/shared/InputField";
 import PageHeader from "@/components/shared/PageHeader";
+import PrimaryButton from "@/components/shared/PrimaryButton";
 
 export default function RegisterPage() {
   return (
@@ -8,9 +11,25 @@ export default function RegisterPage() {
         description="Create an account to start managing tasks and tickets."
       />
 
-      <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-        <p className="text-sm text-gray-600">Register form will go here.</p>
-      </div>
+      <AuthCard>
+        <div className="space-y-4">
+          <InputField
+            label="Name"
+            placeholder="Enter your full name"
+          />
+          <InputField
+            label="Email"
+            type="email"
+            placeholder="Enter your email"
+          />
+          <InputField
+            label="Password"
+            type="password"
+            placeholder="Create a password"
+          />
+          <PrimaryButton>Create Account</PrimaryButton>
+        </div>
+      </AuthCard>
     </main>
   );
 }

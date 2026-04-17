@@ -1,4 +1,5 @@
 import PageHeader from "@/components/shared/PageHeader";
+import SectionCard from "@/components/shared/SectionCard";
 
 export default function TicketsPage() {
   return (
@@ -8,9 +9,9 @@ export default function TicketsPage() {
         description="Track support issues, priorities, and status updates."
       />
 
-      <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+      <SectionCard>
         <p className="text-sm text-gray-600">Ticket list will appear here.</p>
-      </div>
+      </SectionCard>
     </main>
   );
 }

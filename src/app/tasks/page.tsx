@@ -1,4 +1,5 @@
 import PageHeader from "@/components/shared/PageHeader";
+import SectionCard from "@/components/shared/SectionCard";
 
 export default function TasksPage() {
   return (
@@ -8,9 +9,9 @@ export default function TasksPage() {
         description="Manage task creation, progress, and completion."
       />
 
-      <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+      <SectionCard>
         <p className="text-sm text-gray-600">Task list will appear here.</p>
-      </div>
+      </SectionCard>
     </main>
   );
 }
