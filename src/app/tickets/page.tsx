@@ -1,5 +1,7 @@
+import FilterBar from "@/components/shared/FilterBar";
 import PageHeader from "@/components/shared/PageHeader";
-import SectionCard from "@/components/shared/SectionCard";
+import { mockTickets } from "@/constants/mockTickets";
+import TicketCard from "@/features/tickets/TicketCard";
 
 export default function TicketsPage() {
   return (
@@ -9,9 +11,21 @@ export default function TicketsPage() {
         description="Track support issues, priorities, and status updates."
       />
 
-      <SectionCard>
-        <p className="text-sm text-gray-600">Ticket list will appear here.</p>
-      </SectionCard>
+      <FilterBar
+        searchPlaceholder="Search tickets..."
+        primaryActionLabel="Create Ticket"
+      />
+
+      <div className="grid gap-4">
+        {mockTickets.map((ticket) => (
+          <TicketCard
+            key={ticket.id}
+            subject={ticket.subject}
+            priority={ticket.priority}
+            status={ticket.status}
+          />
+        ))}
+      </div>
     </main>
   );
 }

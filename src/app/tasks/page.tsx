@@ -1,5 +1,7 @@
+import FilterBar from "@/components/shared/FilterBar";
 import PageHeader from "@/components/shared/PageHeader";
-import SectionCard from "@/components/shared/SectionCard";
+import { mockTasks } from "@/constants/mockTasks";
+import TaskCard from "@/features/tasks/TaskCard";
 
 export default function TasksPage() {
   return (
@@ -9,9 +11,21 @@ export default function TasksPage() {
         description="Manage task creation, progress, and completion."
       />
 
-      <SectionCard>
-        <p className="text-sm text-gray-600">Task list will appear here.</p>
-      </SectionCard>
+      <FilterBar  
+        searchPlaceholder="Search tasks..."
+        primaryActionLabel="Create Task"
+      />
+
+      <div className="grid gap-4">
+        {mockTasks.map((task) => (
+          <TaskCard
+            key={task.id}
+            title={task.title}
+            description={task.description}
+            status={task.status}
+          />
+        ))}
+      </div>
     </main>
   );
 }
