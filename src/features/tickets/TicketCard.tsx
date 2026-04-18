@@ -5,6 +5,7 @@ type TicketCardProps = {
   priority: string;
   status: string;
   isSelected?: boolean;
+  onClick?: () => void;
 };
 
 export default function TicketCard({
@@ -12,11 +13,14 @@ export default function TicketCard({
   priority,
   status,
   isSelected = false,
+  onClick
 }: TicketCardProps) {
   return (
-    <div className={`rounded-xl border bg-white p-5 shadow-sm ${
-  isSelected ? "border-gray-900 ring-1 ring-gray-900" : "border-gray-200"
-}`}>
+    <div className={`rounded-xl border bg-white p-5 shadow-sm transition ${
+        isSelected
+            ? "border-gray-900 ring-1 ring-gray-900"
+            : "border-gray-200"
+        }`} onClick={onClick}>
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-lg font-semibold text-gray-900">{subject}</h3>
         <StatusBadge label={status} />

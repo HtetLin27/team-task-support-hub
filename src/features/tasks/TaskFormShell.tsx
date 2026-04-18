@@ -3,8 +3,13 @@ import InputField from "@/components/shared/InputField";
 import SelectField from "@/components/shared/SelectField";
 import TextAreaField from "@/components/shared/TextAreaField";
 import PrimaryButton from "@/components/shared/PrimaryButton";
+import SecondaryButton from "@/components/shared/SecondaryButton";
 
-export default function TaskFormShell() {
+type TaskFormShellProps = {
+  onCancel?: () => void;
+}
+
+export default function TaskFormShell({ onCancel }: TaskFormShellProps) {
   return (
     <FormSectionCard
       title="Create Task"
@@ -16,7 +21,10 @@ export default function TaskFormShell() {
         label="Description"
         placeholder="Write a short task description"
       />
-      <PrimaryButton>Create Task</PrimaryButton>
+      <div className="flex items-center gap-2">
+        <SecondaryButton onClick={onCancel}>Cancel</SecondaryButton>
+        <PrimaryButton>Create Task</PrimaryButton>
+      </div>
     </FormSectionCard>
   );
 }

@@ -3,8 +3,13 @@ import InputField from "@/components/shared/InputField";
 import SelectField from "@/components/shared/SelectField";
 import TextAreaField from "@/components/shared/TextAreaField";
 import PrimaryButton from "@/components/shared/PrimaryButton";
+import SecondaryButton from "@/components/shared/SecondaryButton";
 
-export default function TicketFormShell() {
+type TicketFormShellProps = {
+  onCancel?: () => void;
+};
+
+export default function TicketFormShell({ onCancel }: TicketFormShellProps  ) {
   return (
     <FormSectionCard
       title="Create Ticket"
@@ -17,7 +22,10 @@ export default function TicketFormShell() {
         label="Description"
         placeholder="Describe the issue or request"
       />
-      <PrimaryButton>Create Ticket</PrimaryButton>
+      <div className="flex items-center gap-2">
+        <SecondaryButton onClick={onCancel}>Cancel</SecondaryButton>
+        <PrimaryButton>Create Ticket</PrimaryButton>
+      </div>
     </FormSectionCard>
   );
 }

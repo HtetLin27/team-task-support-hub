@@ -5,11 +5,13 @@ import SecondaryButton from "@/components/shared/SecondaryButton";
 type FilterBarProps = {
   searchPlaceholder: string;
   primaryActionLabel: string;
+  onPrimaryAction?: () => void;
 };
 
 export default function FilterBar({
   searchPlaceholder,
   primaryActionLabel,
+  onPrimaryAction,
 }: FilterBarProps) {
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm md:flex-row md:items-center md:justify-between">
@@ -18,8 +20,10 @@ export default function FilterBar({
       </div>
 
       <div className="flex items-center gap-2">
-        <SecondaryButton>Filter</SecondaryButton>
-        <PrimaryButton>{primaryActionLabel}</PrimaryButton>
+        <SecondaryButton >Filter</SecondaryButton>
+        <PrimaryButton onClick={onPrimaryAction}>
+          {primaryActionLabel}
+        </PrimaryButton>
       </div>
     </div>
   );
