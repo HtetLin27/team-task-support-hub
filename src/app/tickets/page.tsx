@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 
 import EmptyState from "@/components/shared/EmptyState";
 import FilterBar from "@/components/shared/FilterBar";
@@ -7,13 +8,13 @@ import { mockTickets } from "@/constants/mockTickets";
 import TicketCard from "@/features/tickets/TicketCard";
 import TicketDetailShell from "@/features/tickets/TicketDetailShell";
 import TicketFormShell from "@/features/tickets/TicketFormShell";
-import { useState } from "react";
 
 export default function TicketsPage() {
+  const [tickets, setTickets] = useState(mockTickets);
   const [selectedTicketId, setSelectedTicketId] = useState(mockTickets[0]?.id ?? null);
   const [showCreateForm, setShowCreateForm] = useState(false);
    const selectedTicket =
-    mockTickets.find((ticket) => ticket.id === selectedTicketId) ?? mockTickets[0];
+    tickets.find((ticket) => ticket.id === selectedTicketId) ?? tickets[0];
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
       <PageHeader
@@ -30,7 +31,7 @@ export default function TicketsPage() {
       <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
         <div className="space-y-4">
           <div className="grid gap-4">
-            {mockTickets.map((ticket) => (
+            {tickets.map((ticket) => (
               <TicketCard
                 key={ticket.id}
                 subject={ticket.subject}
@@ -47,7 +48,22 @@ export default function TicketsPage() {
         </div>
         <div className="space-y-4">
            {showCreateForm ? (
-              <TicketFormShell onCancel={() => setShowCreateForm(false)} />
+              <TicketFormShell onCancel={() => setShowCreateForm(false)}
+               onCreate={(ticketData) =>{
+                const newTicket = {
+                  id: Date.now(),
+                  subject: ticketData.subject,
+                  priority: ticketData.priority,
+                  status: ticketData.status,
+                  description: ticketData.description,
+                  requester: "Htet",
+                  createdAt: new Date().toISOString(),
+                }
+                setTickets((prev) => [newTicket, ...prev]);
+                setSelectedTicketId(newTicket.id);
+                setShowCreateForm(false);
+               }}
+               />
             ) : selectedTicket ? (
               <TicketDetailShell
                 subject={selectedTicket.subject}
