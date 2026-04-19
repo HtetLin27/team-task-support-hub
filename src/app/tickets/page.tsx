@@ -13,8 +13,16 @@ export default function TicketsPage() {
   const [tickets, setTickets] = useState(mockTickets);
   const [selectedTicketId, setSelectedTicketId] = useState(mockTickets[0]?.id ?? null);
   const [showCreateForm, setShowCreateForm] = useState(false);
-   const selectedTicket =
+  const selectedTicket =
     tickets.find((ticket) => ticket.id === selectedTicketId) ?? tickets[0];
+  const [searchText, setSearchText] = useState("");
+  const filteredTickets = tickets.filter((ticket) =>
+  ticket.subject.toLowerCase().includes(searchText.toLowerCase()) ||
+  ticket.priority.toLowerCase().includes(searchText.toLowerCase())
+);
+
+  const visibleSelectedTicket =
+    filteredTickets.find((ticket) => ticket.id === selectedTicketId) ?? filteredTickets[0] ?? null;
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
       <PageHeader
@@ -26,12 +34,37 @@ export default function TicketsPage() {
         searchPlaceholder="Search tickets..."
         primaryActionLabel="Create Ticket"
         onPrimaryAction={()=>setShowCreateForm(true)}
+        searchValue={searchText}
+        onSearchChange={setSearchText}
+        onSecondaryAction={() => setSearchText("")}
       />
 
       <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
         <div className="space-y-4">
           <div className="grid gap-4">
-            {tickets.map((ticket) => (
+            {filteredTickets.length > 0 ? (
+              <div className="grid gap-4">
+                {filteredTickets.map((ticket) => (
+                  <TicketCard
+                    key={ticket.id}
+                    subject={ticket.subject}
+                    priority={ticket.priority}
+                    status={ticket.status}
+                    isSelected={ticket.id === selectedTicketId && !showCreateForm}
+                    onClick={() => {
+                      setSelectedTicketId(ticket.id);
+                      setShowCreateForm(false);
+                    }}
+                  />
+                ))}
+              </div>
+            ) : (
+              <EmptyState
+                title="No tickets found"
+                description="Try a different search keyword or create a new ticket."
+              />
+            )}
+            {/* {tickets.map((ticket) => (
               <TicketCard
                 key={ticket.id}
                 subject={ticket.subject}
@@ -43,7 +76,7 @@ export default function TicketsPage() {
                   setShowCreateForm(false);
                 }}
               />
-            ))}
+            ))} */}
           </div>
         </div>
         <div className="space-y-4">
@@ -64,13 +97,13 @@ export default function TicketsPage() {
                 setShowCreateForm(false);
                }}
                />
-            ) : selectedTicket ? (
+            ) : visibleSelectedTicket ? (
               <TicketDetailShell
-                subject={selectedTicket.subject}
-                priority={selectedTicket.priority}
-                status={selectedTicket.status}
-                requester={selectedTicket.requester}
-                createdAt={selectedTicket.createdAt}                      />
+                subject={visibleSelectedTicket.subject}
+                priority={visibleSelectedTicket.priority}
+                status={visibleSelectedTicket.status}
+                requester={visibleSelectedTicket.requester}
+                createdAt={visibleSelectedTicket.createdAt}                      />
             ) : (
               <EmptyState
                 title="No ticket selected"

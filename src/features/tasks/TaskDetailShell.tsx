@@ -1,6 +1,7 @@
 import DetailSectionCard from "@/components/shared/DetailSectionCard";
 import InfoListCard from "@/components/shared/InfoListCard";
 import StatusBadge from "@/components/shared/StatusBadge";
+import { formatDate } from "@/lib/formatDate";
 
 type TaskDetailShellProps = {
   title: string;
@@ -33,7 +34,7 @@ export default function TaskDetailShell({
         items={[
           { label: "Priority", value: priority },
           { label: "Assignee", value: assignee },
-          { label: "Created At", value: createdAt },
+          { label: "Created At", value: formatDate(createdAt) },
         ]}
       />
     </div>

@@ -1,6 +1,7 @@
 import DetailSectionCard from "@/components/shared/DetailSectionCard";
 import InfoListCard from "@/components/shared/InfoListCard";
 import StatusBadge from "@/components/shared/StatusBadge";
+import { formatDate } from "@/lib/formatDate";
 
 type TicketDetailShellProps = {
   subject: string;
@@ -33,7 +34,7 @@ export default function TicketDetailShell({
         items={[
           { label: "Priority", value: priority },
           { label: "Requester", value: requester },
-          { label: "Created At", value: createdAt },
+          { label: "Created At", value: formatDate(createdAt) },
         ]}
       />
     </div>
